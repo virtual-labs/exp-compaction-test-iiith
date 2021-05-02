@@ -1,18 +1,93 @@
 [
-{"question":"This is a Sample Question 1?",
+{"question":"1. Due to compaction the parameters which increase in magnitude is",
 "answers":{
-            "a":"answer1",
-            "b":"answer2",
-            "c":"answer3",
-            "d":"answer4"
+            "a":"Shear strength ",
+            "b":"Void ratio",
+            "c":"% of air voids",
+            "d":"None"
           },
 "correctAnswer":"a"},
-{"question":"This is a Sample Question 2?",
+
+{"question":"2. Modified proctor test is used for",
 "answers":{
-            "a":"answer1",
-            "b":"answer2",
-            "c":"answer3",
-            "d":"answer4"
+            "a":"Runways",
+            "b":"Highways",
+            "c":"Embankments",
+            "d":"Earthen dams"
           },
-"correctAnswer":"c"} 
+"correctAnswer":"a"},
+ 
+{"question":"3. Energy ratio in modified proctor test to standard proctor test is given by",
+"answers":{
+            "a":"4.55 ",
+            "b":"4",
+            "c":"3.55",
+            "d":"None"
+          },
+"correctAnswer":"a"},
+
+{"question":"4. For pure sandy soils",
+"answers":{
+            "a":"Compaction curve is not useful",
+            "b":"A well defined OMC exists",
+            "c":"Modified proctor test is recommended",
+            "d":"Jodhpur miniature compaction test is recommended"
+          },
+"correctAnswer":"a"},
+
+{"question":"5. The 95% saturation line and 5% air voids line are",
+"answers":{
+            "a":"same",
+            "b":"Different",
+            "c":"Both a and b",
+            "d":"None"
+          },
+"correctAnswer":"b"},
+
+{"question":"6. Compaction of a soil is measured in terms of",
+"answers":{
+            "a":"Dry density",
+            "b":"Specific gravity",
+            "c":"Compressibility",
+            "d":"Permeability"
+          },
+"correctAnswer":"a"},
+
+{"question":"7. Factors effecting the compaction are",
+"answers":{
+            "a":"Water content",
+            "b":"Compaction energy",
+            "c":"Soil type",
+            "d":"All the above"
+          },
+"correctAnswer":"d"},
+
+{"question":"8. In a compaction test with increase in compactive effort",
+"answers":{
+            "a":"Maximum dry density increase but OMC decreases",
+            "b":"The compaction cure is shifted to the left and higher ",
+            "c":"Both the above",
+            "d":"Both maximum dry density and OMC increases"
+          },
+"correctAnswer":"c"},
+
+{"question":"9. Relative compaction is",
+"answers":{
+            "a":"Similar to relative density",
+            "b":"A compaction process",
+            "c":"A ratio of ᵞd of field to the ᵞd of lab",
+            "d":"0.01mm"
+          },
+"correctAnswer":"d"},
+
+{"question":"10. Standard proctor test is also known as",
+"answers":{
+            "a":"I.S light compaction test",
+            "b":"I.S heavy compaction test",
+            "c":"None",
+            "d":"Both a and b"
+          },
+"correctAnswer":"a"}
+
+
 ]

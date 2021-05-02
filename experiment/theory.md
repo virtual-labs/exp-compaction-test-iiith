@@ -1,1 +1,3 @@
-### Link your theory in here
+Compaction is the process of densification of soil mass by reducing air voids. The purpose of laboratory compaction test is so determine the proper amount of water at which the weight of the soil grains in a unit volume of the compacted is maximum, the amount of water is thus called the Optimum Moisture Content (OMC). In the laboratory different values of moisture contents and the resulting dry densities, obtained after compaction are plotted both to arithmetic scale, the former as abscissa and the latter as ordinate. The points thus obtained are joined together as a curve. The maximum dry density and the corresponding OMC are read from the curve. 
+
+[Read More](docs/CompactionTest.pdf)
