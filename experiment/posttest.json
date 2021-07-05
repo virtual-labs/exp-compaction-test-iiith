@@ -1,18 +1,107 @@
-[
-{"question":"This is a Sample Question 1?",
-"answers":{
-            "a":"answer1",
-            "b":"answer2",
-            "c":"answer3",
-            "d":"answer4"
-          },
-"correctAnswer":"a"},
-{"question":"This is a Sample Question 2?",
-"answers":{
-            "a":"answer1",
-            "b":"answer2",
-            "c":"answer3",
-            "d":"answer4"
-          },
-"correctAnswer":"c"} 
-]
+{
+	"version": 2.0,
+	"questions": [
+		{
+			"question": "1. The energy ratio in modified proctor test to standard proctor test is given by ____.",
+			"answers": {
+				"a": "3.55",
+				"b": "4",
+				"c": "4.55",
+				"d": "None of the above"
+			},
+			"explanations": {
+				"a": "",
+				"b": "",
+				"c": "",
+				"d": ""
+			},
+			"difficulty": "beginner",
+			"correctAnswer": "c"
+		},
+		{
+			"question": "2. Which of the following is true for pure sandy soils?",
+			"answers": {
+				"a": "Compaction curve is not useful",
+				"b": "A well defined OMC exists",
+				"c": "Modified proctor test is recommended",
+				"d": "Jodhpur miniature compaction test is recommended"
+			},
+			"explanations": {
+				"a": "",
+				"b": "",
+				"c": "",
+				"d": ""
+			},
+			"difficulty": "beginner",
+			"correctAnswer": "a"
+		},
+		{
+			"question": "3. The 95% saturation and the 5% air voids lines are ____.",
+			"answers": {
+				"a": "Same",
+				"b": "Different",
+				"c": "Both a & b",
+				"d": "None of the above"
+			},
+			"explanations": {
+				"a": "",
+				"b": "",
+				"c": "",
+				"d": ""
+			},
+			"difficulty": "beginner",
+			"correctAnswer": "b"
+		},
+		{
+			"question": "4. Which of the following are factors that affect compaction?",
+			"answers": {
+				"a": "Water content",
+				"b": "Compaction energy",
+				"c": "Soil type",
+				"d": "All of the above"
+			},
+			"explanations": {
+				"a": "",
+				"b": "",
+				"c": "",
+				"d": ""
+			},
+			"difficulty": "beginner",
+			"correctAnswer": "d"
+		},
+		{
+			"question": "5. In a compaction test with increase in compactive effort, ____.",
+			"answers": {
+				"a": "Maximum dry density increases but OMC decreases",
+				"b": "The compaction cure is shifted to the left and higher",
+				"c": "Both maximum dry density and OMC increase",
+				"d": "Both a and b"
+			},
+			"explanations": {
+				"a": "",
+				"b": "",
+				"c": "",
+				"d": ""
+			},
+			"difficulty": "intermediate",
+			"correctAnswer": "d"
+		},
+		{
+			"question": "6. Compaction of an embankment is carried out in 500 mm thick layers. The rammer used for compaction has a foot area of 0.05 m<sup>2</sup> and the energy imparted in every drop of the rammer is 400 Nm. Assuming 50% more energy in each pass over the compacted area due to overlap, the number of passes required to develop compactive energy equivalent to Indian Standard light compacting for each layer would be _____ .",
+			"answers": {
+				"a": "10",
+				"b": "16",
+				"c": "20",
+				"d": "26"
+			},
+			"explanations": {
+				"a": "",
+				"b": "",
+				"c": "",
+				"d": "Considering 50% more energy in each drop of the rammer, total energy imparted by rammer = 1.50 x Energy imparted in every drop of rammer = 1.5 x 400 = 600 Nm. The volume of soil compacted by rammer = Foot area x layer thickness = 0.05 x 104 x 500 x 10 - 1 = 25000 cc. Now, For Indian Standard Light Compaction Test, 2.6 kg of hammer is allowed to fall from a height of 31 cm. Also, soil is compacted in 3 layers with each layer tamped 25 times. The volume of soil considered is 1000 cc. Thus, Energy imparted in Light Compaction Test = (2.6 x 9.81) x (31 x 10 - 2) x 3 x 25 = 593.01 Nm. Now, comparing energy from rammer and Light Compaction Test, n x 600 / 25000 = 593.01 / 1000 => n = 24.71 ≈ 25."
+			},
+			"difficulty": "advanced",
+			"correctAnswer": "d"
+		}
+	]
+}

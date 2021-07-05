@@ -1,18 +1,90 @@
-[
-{"question":"This is a Sample Question 1?",
-"answers":{
-            "a":"answer1",
-            "b":"answer2",
-            "c":"answer3",
-            "d":"answer4"
-          },
-"correctAnswer":"a"},
-{"question":"This is a Sample Question 2?",
-"answers":{
-            "a":"answer1",
-            "b":"answer2",
-            "c":"answer3",
-            "d":"answer4"
-          },
-"correctAnswer":"c"} 
-]
+{
+	"version": 2.0,
+	"questions": [
+			{
+				"question": "1. Compaction of a soil is measured in terms of which of the following?",
+				"answers": {
+					"a": "Compressibility",
+					"b": "Specific gravity",
+					"c": "Dry density",
+					"d": "Permeability"
+				},
+				"explanations": {
+					"a": "",
+					"b": "",
+					"c": "",
+					"d": ""
+				},
+				"difficulty": "beginner",
+				"correctAnswer": "c"
+			},
+			{
+				"question": "2. Relative compaction is ____.",
+				"answers": {
+					"a": "Similar to relative density",
+					"b": "A compaction process",
+					"c": "Dry density obtained in the field",
+					"d": "A ratio of d of field to the d of lab"
+				},
+				"explanations": {
+					"a": "",
+					"b": "",
+					"c": "",
+					"d": ""
+				},
+				"difficulty": "beginner",
+				"correctAnswer": "d"
+			},
+			{
+				"question": "3. Standard proctor test is also known as ____.",
+				"answers": {
+					"a": "I.S heavy compaction test",
+					"b": "I.S light compaction test",
+					"c": "",
+					"d": "None of the above"
+				},
+				"explanations": {
+					"a": "",
+					"b": "",
+					"c": "",
+					"d": ""
+				},
+				"difficulty": "beginner",
+				"correctAnswer": "b"
+			},
+			{
+				"question": "4. The modified proctor test is used for which of the following?",
+				"answers": {
+					"a": "Runways",
+					"b": "Highways",
+					"c": "Embankments",
+					"d": "Earthen dams"
+				},
+				"explanations": {
+					"a": "",
+					"b": "",
+					"c": "",
+					"d": ""
+				},
+				"difficulty": "beginner",
+				"correctAnswer": "a"
+			},
+			{
+				"question": "5. Which of the following values increases due to compaction?",
+				"answers": {
+					"a": "Shear strength",
+					"b": "Void ratio",
+					"c": "Percent of air voids",
+					"d": "None of the above"
+				},
+				"explanations": {
+					"a": "",
+					"b": "",
+					"c": "",
+					"d": ""
+				},
+				"difficulty": "intermediate",
+				"correctAnswer": "a"
+			}	
+	]
+}
