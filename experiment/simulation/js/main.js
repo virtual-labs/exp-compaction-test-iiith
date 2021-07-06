@@ -32,20 +32,19 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		updatePos(objs['rammer'], translate);
 
-		if(objs['rammer'].pos[1] + objs['rammer'].height === objs['dolly'].pos[1])
+		if(objs['rammer'].pos[1] + objs['rammer'].height === objs['collar'].pos[1])
 		{
-			if(extras['soilPart'].pos[1] + extras['soilPart'].height <= objs['cutter'].pos[1] + objs['cutter'].height - translate[1])
+			if(extras['soilPart'].pos[1] + extras['soilPart'].height <= objs['mould'].pos[1] + objs['mould'].height - translate[1])
 			{
 				extras['soilPart'].adding(translate[1]);
 			}
 
-			updatePos(objs['dolly'], translate);
-			updatePos(objs['cutter'], translate);
-			step = limCheck(objs['cutter'], translate, lim, step);
+			updatePos(objs['collar'], translate);
+			updatePos(objs['mould'], translate);
+			step = limCheck(objs['mould'], translate, lim, step);
 			translate[1] *= -1;
 			if(step === 9)
 			{
-				objs['soil'] = new cutSoil(180, 300, 450, 210);
 				cutStep = false;
 			}
 		}
@@ -67,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		{
 			if(step === 2)
 			{
-				document.getElementById("output1").innerHTML = "Mass of cutter = " + String(10) + " g";
+				document.getElementById("output1").innerHTML = "Mass of mould = " + String(10) + " g";
 			}
 
 			else if(step === enabled.length - 2)
@@ -115,21 +114,6 @@ document.addEventListener('DOMContentLoaded', function(){
 		};
 	};
 
-	class cutSoil{
-		constructor(height, width, x, y) {
-			this.height = height;
-			this.width = width;
-			this.pos = [x, y];
-			this.img = new Image();
-			this.img.src = './images/cut-soil.png';
-			this.img.onload = () => {ctx.drawImage(this.img, this.pos[0], this.pos[1], this.width, this.height);}; 
-		};
-
-		draw(ctx) {
-			ctx.drawImage(objs['soil'].img, objs['soil'].pos[0], objs['soil'].pos[1], objs['soil'].width, objs['soil'].height);
-		};
-	};
-
 	class unevenSoil{
 		constructor(height, width, x, y) {
 			this.height = height;
@@ -145,33 +129,78 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 	};
 
-	class cutter{
+	class mould{
 		constructor(height, width, x, y) {
 			this.height = height;
 			this.width = width;
 			this.pos = [x, y];
 			this.img = new Image();
-			this.img.src = './images/cutter.png';
+			this.img.src = './images/mould.png';
 			this.img.onload = () => {ctx.drawImage(this.img, this.pos[0], this.pos[1], this.width, this.height);}; 
 		};
 
 		draw(ctx) {
-			ctx.drawImage(objs['cutter'].img, objs['cutter'].pos[0], objs['cutter'].pos[1], objs['cutter'].width, objs['cutter'].height);
+			ctx.drawImage(objs['mould'].img, objs['mould'].pos[0], objs['mould'].pos[1], objs['mould'].width, objs['mould'].height);
 		}
 	};
 
-	class dolly{
+	class water {
+		constructor(height, width, radius, x, y) {
+			this.height = height;
+			this.width = width;
+			this.radius = radius;
+			this.pos = [x, y];
+		};
+
+		draw(ctx) {
+			ctx.fillStyle = "white";
+			ctx.lineWidth = 3;
+
+			if(this.width < 2 * this.radius)
+			{
+				this.radius = this.width / 2;
+			}
+
+			if(this.height < 2 * this.radius)
+			{
+				this.radius = this.height / 2;
+			}
+
+			ctx.beginPath();
+			ctx.moveTo(this.pos[0] + this.radius, this.pos[1]);
+			ctx.arcTo(this.pos[0] + this.width, this.pos[1], this.pos[0] + this.width, this.pos[1] + this.height, this.radius);
+			ctx.arcTo(this.pos[0] + this.width, this.pos[1] + this.height, this.pos[0], this.pos[1] + this.height, this.radius);
+			ctx.arcTo(this.pos[0], this.pos[1] + this.height, this.pos[0], this.pos[1], this.radius);
+			ctx.arcTo(this.pos[0], this.pos[1], this.pos[0] + this.width, this.pos[1], this.radius);
+			ctx.closePath();
+			ctx.fill();
+			ctx.stroke();
+
+			const e1 = [this.pos[0] + this.width, this.pos[1]], e2 = [...this.pos];
+			const gradX = (e1[0] - e2[0]) / -4, gradY = 10;
+
+			ctx.beginPath();
+			ctx.moveTo(e2[0], e2[1]);
+			curvedArea(ctx, e2, -1 * gradX, -1 * gradY);
+			curvedArea(ctx, e1, gradX, gradY);
+			ctx.closePath();
+			ctx.fill();
+			ctx.stroke();
+		};
+	};
+
+	class collar{
 		constructor(height, width, x, y) {
 			this.height = height;
 			this.width = width;
 			this.pos = [x, y];
 			this.img = new Image();
-			this.img.src = './images/dolly.png';
+			this.img.src = './images/collar.png';
 			this.img.onload = () => {ctx.drawImage(this.img, this.pos[0], this.pos[1], this.width, this.height);}; 
 		};
 
 		draw(ctx) {
-			ctx.drawImage(objs['dolly'].img, objs['dolly'].pos[0], objs['dolly'].pos[1], objs['dolly'].width, objs['dolly'].height);
+			ctx.drawImage(objs['collar'].img, objs['collar'].pos[0], objs['collar'].pos[1], objs['collar'].width, objs['collar'].height);
 		}
 	};
 
@@ -223,15 +252,16 @@ document.addEventListener('DOMContentLoaded', function(){
 	function init()
 	{
 		cutStep = false;
-		document.getElementById("output1").innerHTML = "Mass of cutter = ____ g";
+		document.getElementById("output1").innerHTML = "Mass of mould = ____ g";
 		document.getElementById("output2").innerHTML = "Volume of soil = ____ cm" + "3".sup();
 
 		objs = {
 			"weight": new weight(270, 240, 90, 190),
-			"soil": new unevenSoil(150, 300, 450, 240),
+			"soil": new unevenSoil(150, 300, 90, 240),
 			"rammer": new rammer(60, 50, 505, 0),
-			"dolly": new dolly(50, 140, 460, 65),
-			"cutter": new cutter(150, 120, 630, 240),
+			"collar": new collar(50, 180, 460, 65),
+			"mould": new mould(120, 180, 570, 270),
+			"water": new water(100, 50, 110, 20)
 		};
 		keys = [];
 
@@ -240,7 +270,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		};
 		extrasKeys = [];
 
-		enabled = [["weight"], ["weight", "cutter"], ["weight", "cutter"], ["weight", "cutter", "soil"], ["weight", "cutter", "soil"], ["cutter", "soil"], ["cutter", "soil", "dolly"], ["cutter", "soil", "dolly", "rammer"], ["cutter", "soil", "dolly", "rammer", "soilPart"], ["weight", "cutter", "soilPart"], []];
+		enabled = [["weight"], ["weight", "mould"], ["weight", "mould"], ["weight", "mould"], ["weight", "mould", "soil"], ["mould", "soil", "water"], ["mould", "soil", "collar"], ["mould", "soil", "collar", "rammer"], ["mould", "soil", "collar", "rammer", "soilPart"], ["weight", "mould", "soilPart"], []];
 		step = 0;
 		translate = [0, 0];
 		lim = [-1, -1];
@@ -283,7 +313,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	function check(event, translate, step, flag=true)
 	{ 
-		if(translate[0] != 0 || translate[1] != 0)
+		if(translate[0] !== 0 || translate[1] !== 0)
 		{
 			return step;
 		}
@@ -296,16 +326,32 @@ document.addEventListener('DOMContentLoaded', function(){
 		keys.forEach(function(val, ind, arr) {
 			if(canvasPos[0] >= objs[val].pos[0] - errMargin && canvasPos[0] <= objs[val].pos[0] + objs[val].width + errMargin && canvasPos[1] >= objs[val].pos[1] - errMargin && canvasPos[1] <= objs[val].pos[1] + objs[val].height + errMargin)
 			{
-				if(step === 2 && val === "cutter")
+				if(step === 2 && val === "mould")
 				{
 					hover = true;
 					translate[0] = -5;
 					translate[1] = -5;
-					lim[0] = 150;
-					lim[1] = 115;
+					lim[0] = 120;
+					lim[1] = 150;
 				}
 
-				if(step === 4 && val === "soil")
+				else if(step === 3 && val === "mould")
+				{
+					hover = true;
+					translate[0] = 5;
+					translate[1] = 5;
+					lim[0] = 570;
+					lim[1] = 270;
+
+					if(flag)
+					{
+						keys = keys.filter(function(val, index) {
+							return val !== "weight";
+						});
+					}
+				}
+
+				else if(step === 4 && val === "soil")
 				{
 					hover = true;
 					if(flag)
@@ -315,7 +361,7 @@ document.addEventListener('DOMContentLoaded', function(){
 					}
 				}
 
-				if(step === 5 && val === "cutter")
+				else if(step === 5 && val === "mould")
 				{
 					hover = true;
 					translate[0] = 5;
@@ -332,7 +378,7 @@ document.addEventListener('DOMContentLoaded', function(){
 					lim[1] = 230;
 				}
 
-				else if(step === 9 && val === "cutter")
+				else if(step === 9 && val === "mould")
 				{
 					hover = true;
 					translate[0] = -5;
@@ -343,7 +389,7 @@ document.addEventListener('DOMContentLoaded', function(){
 					if(flag)
 					{
 						keys = keys.filter(function(val, index) {
-							return val != "dolly" && val != "rammer";
+							return val !== "collar" && val !== "rammer";
 						});
 					}
 				}
@@ -367,6 +413,12 @@ document.addEventListener('DOMContentLoaded', function(){
 		return step;
 	};
 
+	function curvedArea(ctx, e, gradX, gradY)
+	{
+		ctx.bezierCurveTo(e[0], e[1] += gradY, e[0] += gradX, e[1] += gradY, e[0] += gradX, e[1]);
+		ctx.bezierCurveTo(e[0] += gradX, e[1], e[0] += gradX, e[1] -= gradY, e[0], e[1] -= gradY);
+	};
+
 	const canvas = document.getElementById("main");
 	canvas.width = 840;
 	canvas.height = 400;
@@ -376,15 +428,15 @@ document.addEventListener('DOMContentLoaded', function(){
 	const fill = "#A9A9A9", border = "black", lineWidth = 1.5, fps = 150;
 	const msgs = [
 		"Click on 'Weighing Machine' in the apparatus menu to add a weighing machine to the workspace.", 
-		"Click on 'Cutter' in the apparatus menu to add a cutter to the workspace.",
-		"Click on the cutter to move it to the weighing machine and weigh it.",
+		"Click on 'Mould' in the apparatus menu to add a mould to the workspace.",
+		"Click on the mould to move it to the weighing machine and weigh it.",
 		"Click on 'Soil Sample' in the apparatus menu to add a soil sample to the workspace.",
 		"Click on the soil sample to even it out.",
-		"Click on the cutter to move it to the soil sample for cutting.",
-		"Click on 'Dolly' in the apparatus menu to add a dolly to the workspace.",
+		"Click on the mould to move it to the soil sample for cutting.",
+		"Click on 'Collar' in the apparatus menu to add a collar to the workspace.",
 		"Click on 'Rammer' in the apparatus menu to add a rammer to the workspace.",
 		"Click on the rammer to cut through the soil.",
-		"Click on the cutter with soil to weigh it. Finally, determine the water content of the soil sample. Use the following <a href=''>link</a> to learn more about water content determination.",
+		"Click on the mould with soil to weigh it. Finally, determine the water content of the soil sample. Use the following <a href=''>link</a> to learn more about water content determination.",
 		"Click the restart button to perform the experiment again.",
 	];
 
@@ -483,19 +535,19 @@ document.addEventListener('DOMContentLoaded', function(){
 			document.getElementById("main").style.pointerEvents = 'auto';
 		}
 
-		if(translate[0] != 0 || translate[1] != 0)
+		if(translate[0] !== 0 || translate[1] !== 0)
 		{
 			let temp = step;
-			const soilMoves = [9], cutterMoves = [2, 5, 9];
+			const soilMoves = [9], mouldMoves = [2, 3, 5, 9];
 
-			if(cutterMoves.includes(step))
+			if(mouldMoves.includes(step))
 			{
-				updatePos(objs['cutter'], translate);
+				updatePos(objs['mould'], translate);
 				if(step === 9)
 				{
 					updatePos(extras['soilPart'], translate);
 				}
-				temp = limCheck(objs['cutter'], translate, lim, step);
+				temp = limCheck(objs['mould'], translate, lim, step);
 			}
 
 			step = temp;
