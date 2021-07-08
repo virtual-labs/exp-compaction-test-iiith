@@ -31,20 +31,20 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 
 		updatePos(objs['rammer'], translate);
+		const currSoil = objs['soil'].move(step);
 
-		if(objs['rammer'].pos[1] + objs['rammer'].height === objs['collar'].pos[1])
+		if(objs['rammer'].pos[1] + objs['rammer'].height === currSoil.pos[1] + currSoil.errMargin)
 		{
-			if(extras['soilPart'].pos[1] + extras['soilPart'].height <= objs['mould'].pos[1] + objs['mould'].height - translate[1])
+			const retVal = currSoil.cut(5, (objs['collar'].height + objs['mould'].height) / 3);
+			if(retVal)
 			{
-				extras['soilPart'].adding(translate[1]);
+				step += 1;
 			}
 
-			updatePos(objs['collar'], translate);
-			updatePos(objs['mould'], translate);
-			step = limCheck(objs['mould'], translate, lim, step);
 			translate[1] *= -1;
-			if(step === 9)
+			if(step === 11 || step === 13 || step === 15)
 			{
+				translate[1] = -1;
 				cutStep = false;
 			}
 		}
@@ -114,16 +114,66 @@ document.addEventListener('DOMContentLoaded', function(){
 			this.width = width;
 			this.pos = [x, y];
 			this.color = "#654321";
+			this.normal = 10;
+			this.errMargin = 100;
 		};
 
 		draw(ctx) {
 			ctx.beginPath();
 			ctx.fillStyle = this.color;
-			ctx.moveTo(this.pos[0] + this.width, this.pos[1] + this.height);
-			ctx.lineTo(this.pos[0], this.pos[1] + this.height);
+			ctx.rect(this.pos[0], this.pos[1] + this.height - this.normal, this.width, this.normal);
+			ctx.moveTo(this.pos[0], this.pos[1] + this.height - this.normal);
 			ctx.quadraticCurveTo(this.pos[0] + this.width / 2, this.pos[1], this.pos[0] + this.width, this.pos[1] + this.height);
 			ctx.closePath();
 			ctx.fill();
+		};
+
+		cut(change, lim) {
+			if(this.height <= lim)
+			{
+				return 1;
+			}
+
+			this.pos[1] += change;
+			this.normal += change;
+			this.height -= change;
+			return 0;
+		};
+	};
+	
+	class soils {
+		constructor(num, currSoil) {
+			this.height = currSoil.height;
+			this.width = currSoil.width;
+			this.pos = [...currSoil.pos];
+			this.soils = [];
+			
+			for(let i = 0; i < num; i += 1)
+			{
+				this.soils.push(new soil(this.height, this.width, this.pos[0], this.pos[1]));
+				this.soils[i].color = currSoil.color;
+			}
+		};
+
+		draw(ctx) {
+			this.soils.forEach((soil, idx) => {
+				soil.draw(ctx);
+			});
+		};
+
+		move(step) {
+			if(step === 9 || step === 10)
+			{
+				return this.soils[0];
+			}
+			else if(step === 11 || step === 12)
+			{
+				return this.soils[1];
+			}
+			else
+			{
+				return this.soils[2];
+			}
 		};
 	};
 
@@ -278,13 +328,13 @@ document.addEventListener('DOMContentLoaded', function(){
 			"weight": new weight(270, 240, 90, 190),
 			"mould": new mould(120, 180, 570, 270),
 			"collar": new collar(70, 130, 595, 220),
-			"rammer": new rammer(60, 50, 635, 60),
-			"water": new water(70, 60, 180, 60),
-			"soil": new soil(210, 150, 90, 170),
+			"rammer": new rammer(60, 50, 635, 90),
+			"water": new water(70, 60, 165, 60),
+			"soil": new soil(210, 120, 90, 170),
 		};
 		keys = [];
 
-		enabled = [["weight"], ["weight", "mould"], ["weight", "mould"], ["weight", "mould"], ["weight", "mould", "soil"], ["mould", "soil", "water"], ["mould", "soil", "water"], ["mould", "soil", "collar"], ["mould", "soil", "collar", "rammer"], ["mould", "soil", "collar", "rammer"], ["weight", "mould", "soilPart"], []];
+		enabled = [["weight"], ["weight", "mould"], ["weight", "mould"], ["weight", "mould"], ["weight", "mould", "soil"], ["mould", "soil", "water"], ["mould", "soil", "water"], ["mould", "soil", "collar"], ["mould", "soil", "collar", "rammer"], ["mould", "soil", "collar", "rammer"], ["mould", "soil", "collar", "rammer"], ["mould", "soil", "collar", "rammer"], ["mould", "soil", "collar", "rammer"], ["mould", "soil", "collar", "rammer"], ["mould", "soil", "collar", "rammer"], []];
 		step = 0;
 		translate = [0, 0];
 		lim = [-1, -1];
@@ -374,37 +424,56 @@ document.addEventListener('DOMContentLoaded', function(){
 					rotLim = -90;
 				}
 
-				else if(step === 5 && val === "mould")
+				else if(step === 9 && val === "soil")
 				{
 					hover = true;
+					const temp = new soils(3, objs['soil']);
+					objs['soil'] = temp;
+
 					translate[0] = 5;
-					translate[1] = -5;
-					lim[0] = 470;
-					lim[1] = 105;
+					translate[1] = -1;
+					lim[0] = 600;
+					lim[1] = 160;
 				}
 
-				else if(step === 8 && val === "rammer")
+				else if(step === 10 && val === "rammer")
 				{
 					hover = true;
 					cutStep = true;
 					translate[1] = 5;
-					lim[1] = 230;
 				}
 
-				else if(step === 9 && val === "mould")
+				else if(step === 11 && val === "soil")
+				{
+					console.log(objs['soil'].pos, objs['soil'].height);
+					hover = true;
+					translate[0] = 5;
+					translate[1] = -1;
+					lim[0] = 600;
+					lim[1] = 160;
+				}
+
+				else if(step === 12 && val === "rammer")
 				{
 					hover = true;
-					translate[0] = -5;
-					translate[1] = -5;
-					lim[0] = 150;
-					lim[1] = 115;
+					cutStep = true;
+					translate[1] = 5;
+				}
 
-					if(flag)
-					{
-						keys = keys.filter(function(val, index) {
-							return val !== "collar" && val !== "rammer";
-						});
-					}
+				else if(step === 13 && val === "soil")
+				{
+					hover = true;
+					translate[0] = 5;
+					translate[1] = -1;
+					lim[0] = 600;
+					lim[1] = 160;
+				}
+
+				else if(step === 14 && val === "rammer")
+				{
+					hover = true;
+					cutStep = true;
+					translate[1] = 5;
 				}
 			}
 		});
@@ -440,12 +509,18 @@ document.addEventListener('DOMContentLoaded', function(){
 		"Click on 'Weighing Machine' in the apparatus menu to add a weighing machine to the workspace.", 
 		"Click on 'Mould' in the apparatus menu to add a mould to the workspace.",
 		"Click on the mould to move it to the weighing machine and weigh it.",
+		"Click on the mould to move it back away from the weighing machine to make space for other apparatus.",
 		"Click on 'Soil Sample' in the apparatus menu to add a soil sample to the workspace.",
-		"Click on the soil sample to even it out.",
-		"Click on the mould to move it to the soil sample for cutting.",
+		"Click on 'Water' in the apparatus menu to add a container of water to the workspace.",
+		"Click on the water container to pour it onto the soil.",
 		"Click on 'Collar' in the apparatus menu to add a collar to the workspace.",
 		"Click on 'Rammer' in the apparatus menu to add a rammer to the workspace.",
-		"Click on the rammer to cut through the soil.",
+		"Click on the soil to move a portion of it to the mould for compaction.",
+		"Click on the rammer to compact the soil by repeated strikes.",
+		"Click on the soil to move a portion of it to the mould for compaction.",
+		"Click on the rammer to compact the soil by repeated strikes.",
+		"Click on the soil to move a portion of it to the mould for compaction.",
+		"Click on the rammer to compact the soil by repeated strikes.",
 		"Click on the mould with soil to weigh it. Finally, determine the water content of the soil sample. Use the following <a href=''>link</a> to learn more about water content determination.",
 		"Click the restart button to perform the experiment again.",
 	];
@@ -538,6 +613,9 @@ document.addEventListener('DOMContentLoaded', function(){
 				keys = keys.filter(function(val, index) {
 					return val !== "water";
 				});
+
+				rotation = 0;
+				rotLim = -1;
 				step += 1;
 			}
 		}
@@ -545,13 +623,18 @@ document.addEventListener('DOMContentLoaded', function(){
 		if(translate[0] !== 0 || translate[1] !== 0)
 		{
 			let temp = step;
-			const soilMoves = [9], mouldMoves = [2, 3, 5, 9];
+			const soilMoves = [9, 11, 13], mouldMoves = [2, 3];
 
 			if(mouldMoves.includes(step))
 			{
 				updatePos(objs['mould'], translate);
-				
 				temp = limCheck(objs['mould'], translate, lim, step);
+			}
+
+			if(soilMoves.includes(step))
+			{
+				updatePos(objs['soil'].move(step), translate);
+				temp = limCheck(objs['soil'].move(step), translate, lim, step);
 			}
 
 			step = temp;
