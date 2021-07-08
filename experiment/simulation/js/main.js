@@ -101,8 +101,11 @@ document.addEventListener('DOMContentLoaded', function(){
 			if(obj.angle !== rotLim)
 			{
 				obj.angle += rotation;
+				return 0;
 			}
 		});
+
+		return 1;
 	};
 
 	class soil {
@@ -146,6 +149,10 @@ document.addEventListener('DOMContentLoaded', function(){
 			this.pos = [x, y];
 			this.angle = 0;
 			this.waterHeight = height / 2;
+			this.flowPercent = [0, 0];
+			this.flowDims = [height / 6, 180];
+			this.waterStart = [this.waterHeight, -width / 2];
+			this.flowFlag = false;
 		};
 
 		draw(ctx) {
@@ -160,12 +167,6 @@ document.addEventListener('DOMContentLoaded', function(){
 			ctx.fill();
 			ctx.stroke();
 
-			ctx.fillStyle = "#1ca3ec";
-			ctx.beginPath();
-			ctx.rect(-this.width / 2 + 2, this.height / 2 - this.waterHeight, this.width - 4, this.waterHeight - 2)
-			ctx.closePath();
-			ctx.fill();
-
 			const e1 = [this.width / 2, -this.height / 2], e2 = [-this.width / 2, -this.height / 2];
 			const gradX = (e1[0] - e2[0]) / -4, gradY = 5;
 
@@ -178,7 +179,47 @@ document.addEventListener('DOMContentLoaded', function(){
 			ctx.fill();
 			ctx.stroke();
 
+			ctx.fillStyle = "#1ca3ec";
+			ctx.beginPath();
+			ctx.rect(-this.width / 2 + 2, this.height / 2 - this.waterHeight, this.width - 4, this.waterHeight - 2);
+			ctx.rect(-this.width / 2 + 2, this.height / 2 - this.waterStart[0], this.flowDims[0], -this.flowPercent[0] * (this.height - this.waterStart[0]));
+			ctx.rect(this.waterStart[1] + 2 + this.flowDims[0], -this.height / 2 - this.flowDims[0], -this.flowPercent[1] * this.flowDims[1], this.flowDims[0]);
+			ctx.closePath();
+			ctx.fill();
+
 			ctx.setTransform(1, 0, 0, 1, 0, 0);
+		};
+
+		flow(change) {
+			if(this.flowPercent[0] < 1)
+			{
+				this.flowPercent[0] += change;
+			}
+			else if(this.flowPercent[1] < 1 && !this.flowFlag)
+			{
+				this.flowPercent[1] += change;
+			}
+			else if(this.waterHeight > 1)
+			{
+				this.flowFlag = true;
+				this.waterHeight *= (1 - change);
+				this.waterStart[0] *= (1 - change);
+			}
+			else if(this.waterStart[0] < this.height)
+			{
+				this.waterStart[0] += change * this.height;
+			}
+			else if(this.waterStart[1] > -this.width / 2 - this.flowDims[1])
+			{
+				this.waterStart[1] -= change * this.flowDims[1];
+				this.flowPercent[1] -= change;
+			}
+			else
+			{
+				return 1;
+			}
+
+			return 0;
 		};
 	};
 
@@ -235,15 +276,15 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		objs = {
 			"weight": new weight(270, 240, 90, 190),
-			"soil": new soil(210, 150, 90, 170),
 			"mould": new mould(120, 180, 570, 270),
-			"collar": new collar(50, 180, 460, 65),
-			"rammer": new rammer(60, 50, 505, 0),
-			"water": new water(70, 60, 230, 60)
+			"collar": new collar(70, 130, 595, 220),
+			"rammer": new rammer(60, 50, 635, 60),
+			"water": new water(70, 60, 180, 60),
+			"soil": new soil(210, 150, 90, 170),
 		};
 		keys = [];
 
-		enabled = [["weight"], ["weight", "mould"], ["weight", "mould"], ["weight", "mould"], ["weight", "mould", "soil"], ["mould", "soil", "water"], ["mould", "soil", "water"], ["mould", "soil", "collar", "rammer"], ["mould", "soil", "collar", "rammer", "soilPart"], ["weight", "mould", "soilPart"], []];
+		enabled = [["weight"], ["weight", "mould"], ["weight", "mould"], ["weight", "mould"], ["weight", "mould", "soil"], ["mould", "soil", "water"], ["mould", "soil", "water"], ["mould", "soil", "collar"], ["mould", "soil", "collar", "rammer"], ["mould", "soil", "collar", "rammer"], ["weight", "mould", "soilPart"], []];
 		step = 0;
 		translate = [0, 0];
 		lim = [-1, -1];
@@ -489,7 +530,18 @@ document.addEventListener('DOMContentLoaded', function(){
 			document.getElementById("main").style.pointerEvents = 'auto';
 		}
 
-		rotate([objs['water']], rotation, rotLim);
+		if(step === 6 && rotation && rotate([objs['water']], rotation, rotLim))
+		{
+			if(objs['water'].flow(0.01))
+			{
+				objs['soil'].color = "#b86d29";
+				keys = keys.filter(function(val, index) {
+					return val !== "water";
+				});
+				step += 1;
+			}
+		}
+
 		if(translate[0] !== 0 || translate[1] !== 0)
 		{
 			let temp = step;
