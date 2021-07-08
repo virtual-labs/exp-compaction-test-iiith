@@ -95,41 +95,36 @@ document.addEventListener('DOMContentLoaded', function(){
 		obj.pos[1] += translate[1];
 	};
 
-	class soilPart{
+	function rotate(objs, rotation, rotLim)
+	{
+		objs.forEach((obj, ix) => {
+			if(obj.angle !== rotLim)
+			{
+				obj.angle += rotation;
+			}
+		});
+	};
+
+	class soil {
 		constructor(height, width, x, y) {
 			this.height = height;
 			this.width = width;
 			this.pos = [x, y];
-			this.img = new Image();
-			this.img.src = './images/soil-sample.png';
-			this.img.onload = () => {ctx.drawImage(this.img, this.pos[0], this.pos[1], this.width, this.height);}; 
+			this.color = "#654321";
 		};
 
 		draw(ctx) {
-			ctx.drawImage(extras['soilPart'].img, extras['soilPart'].pos[0], extras['soilPart'].pos[1], extras['soilPart'].width, extras['soilPart'].height);
-		};
-
-		adding(unit) {
-			this.height += unit;
+			ctx.beginPath();
+			ctx.fillStyle = this.color;
+			ctx.moveTo(this.pos[0] + this.width, this.pos[1] + this.height);
+			ctx.lineTo(this.pos[0], this.pos[1] + this.height);
+			ctx.quadraticCurveTo(this.pos[0] + this.width / 2, this.pos[1], this.pos[0] + this.width, this.pos[1] + this.height);
+			ctx.closePath();
+			ctx.fill();
 		};
 	};
 
-	class unevenSoil{
-		constructor(height, width, x, y) {
-			this.height = height;
-			this.width = width;
-			this.pos = [x, y];
-			this.img = new Image();
-			this.img.src = './images/uneven-soil.png';
-			this.img.onload = () => {ctx.drawImage(this.img, this.pos[0], this.pos[1], this.width, this.height);}; 
-		};
-
-		draw(ctx) {
-			ctx.drawImage(objs['soil'].img, objs['soil'].pos[0], objs['soil'].pos[1], objs['soil'].width, objs['soil'].height);
-		}
-	};
-
-	class mould{
+	class mould {
 		constructor(height, width, x, y) {
 			this.height = height;
 			this.width = width;
@@ -141,44 +136,40 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		draw(ctx) {
 			ctx.drawImage(objs['mould'].img, objs['mould'].pos[0], objs['mould'].pos[1], objs['mould'].width, objs['mould'].height);
-		}
+		};
 	};
 
 	class water {
-		constructor(height, width, radius, x, y) {
+		constructor(height, width, x, y) {
 			this.height = height;
 			this.width = width;
-			this.radius = radius;
 			this.pos = [x, y];
+			this.angle = 0;
+			this.waterHeight = height / 2;
 		};
 
 		draw(ctx) {
-			ctx.fillStyle = "white";
 			ctx.lineWidth = 3;
+			ctx.translate(this.pos[0] + this.width / 2, this.pos[1] + this.height / 2);
+			ctx.rotate(this.angle * Math.PI / 180);
 
-			if(this.width < 2 * this.radius)
-			{
-				this.radius = this.width / 2;
-			}
-
-			if(this.height < 2 * this.radius)
-			{
-				this.radius = this.height / 2;
-			}
-
+			ctx.fillStyle = "white";
 			ctx.beginPath();
-			ctx.moveTo(this.pos[0] + this.radius, this.pos[1]);
-			ctx.arcTo(this.pos[0] + this.width, this.pos[1], this.pos[0] + this.width, this.pos[1] + this.height, this.radius);
-			ctx.arcTo(this.pos[0] + this.width, this.pos[1] + this.height, this.pos[0], this.pos[1] + this.height, this.radius);
-			ctx.arcTo(this.pos[0], this.pos[1] + this.height, this.pos[0], this.pos[1], this.radius);
-			ctx.arcTo(this.pos[0], this.pos[1], this.pos[0] + this.width, this.pos[1], this.radius);
+			ctx.rect(-this.width / 2, -this.height / 2, this.width, this.height)
 			ctx.closePath();
 			ctx.fill();
 			ctx.stroke();
 
-			const e1 = [this.pos[0] + this.width, this.pos[1]], e2 = [...this.pos];
-			const gradX = (e1[0] - e2[0]) / -4, gradY = 10;
+			ctx.fillStyle = "#1ca3ec";
+			ctx.beginPath();
+			ctx.rect(-this.width / 2 + 2, this.height / 2 - this.waterHeight, this.width - 4, this.waterHeight - 2)
+			ctx.closePath();
+			ctx.fill();
 
+			const e1 = [this.width / 2, -this.height / 2], e2 = [-this.width / 2, -this.height / 2];
+			const gradX = (e1[0] - e2[0]) / -4, gradY = 5;
+
+			ctx.fillStyle = "white";
 			ctx.beginPath();
 			ctx.moveTo(e2[0], e2[1]);
 			curvedArea(ctx, e2, -1 * gradX, -1 * gradY);
@@ -186,10 +177,12 @@ document.addEventListener('DOMContentLoaded', function(){
 			ctx.closePath();
 			ctx.fill();
 			ctx.stroke();
+
+			ctx.setTransform(1, 0, 0, 1, 0, 0);
 		};
 	};
 
-	class collar{
+	class collar {
 		constructor(height, width, x, y) {
 			this.height = height;
 			this.width = width;
@@ -201,10 +194,10 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		draw(ctx) {
 			ctx.drawImage(objs['collar'].img, objs['collar'].pos[0], objs['collar'].pos[1], objs['collar'].width, objs['collar'].height);
-		}
+		};
 	};
 
-	class rammer{
+	class rammer {
 		constructor(height, width, x, y) {
 			this.height = height;
 			this.width = width;
@@ -216,25 +209,10 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		draw(ctx) {
 			ctx.drawImage(objs['rammer'].img, objs['rammer'].pos[0], objs['rammer'].pos[1], objs['rammer'].width, objs['rammer'].height);
-		}
-	};
-
-	class evenSoil{
-		constructor(height, width, x, y) {
-			this.height = height;
-			this.width = width;
-			this.pos = [x, y];
-			this.img = new Image();
-			this.img.src = './images/even-soil.png';
-			this.img.onload = () => {ctx.drawImage(this.img, this.pos[0], this.pos[1], this.width, this.height);}; 
 		};
-
-		draw(ctx) {
-			ctx.drawImage(objs['soil'].img, objs['soil'].pos[0], objs['soil'].pos[1], objs['soil'].width, objs['soil'].height);
-		}
 	};
 
-	class weight{
+	class weight {
 		constructor(height, width, x, y) {
 			this.height = height;
 			this.width = width;
@@ -246,7 +224,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		draw(ctx) {
 			ctx.drawImage(objs['weight'].img, objs['weight'].pos[0], objs['weight'].pos[1], objs['weight'].width, objs['weight'].height);
-		}
+		};
 	};
 
 	function init()
@@ -257,23 +235,20 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		objs = {
 			"weight": new weight(270, 240, 90, 190),
-			"soil": new unevenSoil(150, 300, 90, 240),
-			"rammer": new rammer(60, 50, 505, 0),
-			"collar": new collar(50, 180, 460, 65),
+			"soil": new soil(210, 150, 90, 170),
 			"mould": new mould(120, 180, 570, 270),
-			"water": new water(100, 50, 110, 20)
+			"collar": new collar(50, 180, 460, 65),
+			"rammer": new rammer(60, 50, 505, 0),
+			"water": new water(70, 60, 230, 60)
 		};
 		keys = [];
 
-		extras = {
-			"soilPart": new soilPart(0, 110, 475, 255),
-		};
-		extrasKeys = [];
-
-		enabled = [["weight"], ["weight", "mould"], ["weight", "mould"], ["weight", "mould"], ["weight", "mould", "soil"], ["mould", "soil", "water"], ["mould", "soil", "collar"], ["mould", "soil", "collar", "rammer"], ["mould", "soil", "collar", "rammer", "soilPart"], ["weight", "mould", "soilPart"], []];
+		enabled = [["weight"], ["weight", "mould"], ["weight", "mould"], ["weight", "mould"], ["weight", "mould", "soil"], ["mould", "soil", "water"], ["mould", "soil", "water"], ["mould", "soil", "collar", "rammer"], ["mould", "soil", "collar", "rammer", "soilPart"], ["weight", "mould", "soilPart"], []];
 		step = 0;
 		translate = [0, 0];
 		lim = [-1, -1];
+		rotation = 0;
+		rotLim = -1;
 	};
 
 	function restart() 
@@ -321,7 +296,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		const canvasPos = [(canvas.width / canvas.offsetWidth) * (event.pageX - canvas.offsetLeft), (canvas.height / canvas.offsetHeight) * (event.pageY - canvas.offsetTop)];
 		const errMargin = 10;
 
-		let hover = false, updateStep = false;
+		let hover = false;
 		canvas.style.cursor = "default";
 		keys.forEach(function(val, ind, arr) {
 			if(canvasPos[0] >= objs[val].pos[0] - errMargin && canvasPos[0] <= objs[val].pos[0] + objs[val].width + errMargin && canvasPos[1] >= objs[val].pos[1] - errMargin && canvasPos[1] <= objs[val].pos[1] + objs[val].height + errMargin)
@@ -351,14 +326,11 @@ document.addEventListener('DOMContentLoaded', function(){
 					}
 				}
 
-				else if(step === 4 && val === "soil")
+				else if(step === 6 && val === "water")
 				{
 					hover = true;
-					if(flag)
-					{
-						objs['soil'] = new evenSoil(180, 300, 450, 210);
-						updateStep = true;
-					}
+					rotation = -1;
+					rotLim = -90;
 				}
 
 				else if(step === 5 && val === "mould")
@@ -403,13 +375,10 @@ document.addEventListener('DOMContentLoaded', function(){
 			translate[1] = 0;
 			lim[0] = 0;
 			lim[1] = 0;
+			rotation = 0;
+			rotLim = -1;
 		}
 
-		if(updateStep)
-		{
-			return step + 1;
-		}
-		
 		return step;
 	};
 
@@ -440,7 +409,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		"Click the restart button to perform the experiment again.",
 	];
 
-	let step, translate, lim, objs, keys, enabled, small, cutStep, extras, extrasKeys;
+	let step, translate, rotation, lim, rotLim, objs, keys, enabled, small, cutStep;
 	init();
 
 	const tableData = [
@@ -449,14 +418,10 @@ document.addEventListener('DOMContentLoaded', function(){
 		{ "Soil Type": "Clay", "Wet Soil Mass(g)": "", "Water Content(%)": "" } 
 	];
 
-	const objNames = Object.keys(objs), extrasNames = Object.keys(extras);
+	const objNames = Object.keys(objs);
 	objNames.forEach(function(elem, ind) {
 		const obj = document.getElementById(elem);
 		obj.addEventListener('click', function(event) {
-			if(elem === "rammer")
-			{
-				extrasKeys.push("soilPart");
-			}
 			keys.push(elem);
 			step += 1;
 		});
@@ -519,22 +484,12 @@ document.addEventListener('DOMContentLoaded', function(){
 			}
 		});
 
-		extrasNames.forEach(function(name, ind) {
-			if(extrasKeys.includes(name)) 
-			{
-				if(enabled[step].includes(name))
-				{
-					ctr += 1;
-				}
-				extras[name].draw(ctx);
-			}
-		});
-
-		if(ctr === enabled[step].length)
+		if(ctr === enabled[step].length && !rotation &&!translate[0] && !translate[1])
 		{
 			document.getElementById("main").style.pointerEvents = 'auto';
 		}
 
+		rotate([objs['water']], rotation, rotLim);
 		if(translate[0] !== 0 || translate[1] !== 0)
 		{
 			let temp = step;
@@ -543,10 +498,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			if(mouldMoves.includes(step))
 			{
 				updatePos(objs['mould'], translate);
-				if(step === 9)
-				{
-					updatePos(extras['soilPart'], translate);
-				}
+				
 				temp = limCheck(objs['mould'], translate, lim, step);
 			}
 
