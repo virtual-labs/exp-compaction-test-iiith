@@ -627,7 +627,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		"Click on the rammer to compact the soil by repeated strikes.",
 		"Click on the mould with soil to remove the collar and trim the excess soil.",
 		"Click on 'Weighing Machine' in the apparatus menu to add a weighing machine to the workspace.", 
-		"Click on the mould with soil to weigh it. Finally, determine the water content of the soil sample. Use the following <a href=''>link</a> to learn more about water content determination.",
+		"Click on the mould with soil to weigh it. Finally, determine the water content of the soil sample. Use the following <a href='https://sd-iiith.vlabs.ac.in/exp/water-content/'>link</a> to learn more about water content determination.",
 		"Click the restart button to perform the experiment again.",
 	];
 
