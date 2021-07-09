@@ -8,19 +8,31 @@ document.addEventListener('DOMContentLoaded', function(){
 	restartButton.addEventListener('click', function() {restart();});
 
 	function randomNumber(min, max) {
-		return (Math.random() * (max - min + 1) + min).toFixed(2);
+		return Number((Math.random() * (max - min + 1) + min).toFixed(2));
 	};
 
 	function logic(tableData)
 	{
-		const soilWater = { 'Silt': randomNumber(22.5, 27.5), 'Sand': randomNumber(12, 16), 'Clay': randomNumber(30, 50) }, soilDensity = { 'Silt': 1.46, 'Sand': 1.43, 'Clay': 1.39 };
+		const waterContents = [randomNumber(7, 9), randomNumber(10, 12), randomNumber(12, 14), randomNumber(15, 16), randomNumber(17, 18)], soilMasses = [randomNumber(1500, 1600), randomNumber(1700, 1800), randomNumber(2150, 2200), randomNumber(2100, 2150), randomNumber(2000, 2150),];
+		let xVals = [], yVals = [], maxIx = 0;
 		tableData.forEach(function(row, index) {
-			const waterContent = soilWater[row['Soil Type']], ans = soilDensity[row['Soil Type']];
-			row['Wet Soil Mass(g)'] = (ans * (1 + waterContent / 100) * 800).toFixed(2);
-			row["Wet Density (g/cm^3)"] = (ans * (1 + waterContent / 100)).toFixed(2);
-			row['Water Content(%)'] = Number(waterContent);
-			row["Dry Density (g/cm^3)"] = Number(ans);
+			row['Soil Sample No.'] = index + 1;
+			row['Water Content(%)'] = Number(waterContents[index]);
+			row['Wet Compacted Soil Mass(g)'] = Number(soilMasses[index]);
+			row['Wet Density(g/cc)'] = (soilMasses[index] / soilVol).toFixed(2);
+			row['Dry Density(g/cc)'] = Number((row['Wet Density(g/cc)'] / (1 + waterContents[index] / 100)).toFixed(2));
+			xVals.push(row['Water Content(%)']);
+			yVals.push(row['Dry Density(g/cc)']);
+
+			if(yVals[maxIx] < yVals[index])
+			{
+				maxIx = index;
+			}
 		});
+
+		document.getElementById('optWater').innerHTML = "Optimum Moisture Content = " + String(xVals[maxIx]) + " %";
+		document.getElementById('maxDensity').innerHTML = "Maximum Dry Density = " + String(yVals[maxIx]) + " g/cm<sup>3</sup>";
+		return trace(xVals, yVals, 'Graph');
 	};
 
 	function cutting()
@@ -68,15 +80,18 @@ document.addEventListener('DOMContentLoaded', function(){
 		{
 			if(step === 2)
 			{
-				document.getElementById("output1").innerHTML = "Mass of mould = " + String(10) + " g";
+				document.getElementById("output1").innerHTML = "Mass of mould = " + String(randomNumber(3500, 3800)) + " g";
 			}
 
 			else if(step === enabled.length - 2)
 			{
-				document.getElementById("output2").innerHTML = "Volume of soil = 800 cm" + "3".sup();
-				logic(tableData);
+				const retTrace = logic(tableData);
 				generateTableHead(table, Object.keys(tableData[0]));
 				generateTable(table, tableData);
+				drawGraph([retTrace], ['Water Content(%)', 'Dry Density(g/cc)'], 'plot');
+
+				document.getElementById("main").style.display = 'none';
+				document.getElementById("graph").style.display = 'inline-block';
 
 				document.getElementById("apparatus").style.display = 'none';
 				document.getElementById("observations").style.width = '40%';
@@ -331,7 +346,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	function lineFromPoints(p, q)
 	{
 		const m = (q[1] - p[1]) / (q[0] - p[0]), c = p[1] - m * p[0];
-		const xVals = math.range(p[0], q[0], -1).toArray();
+		const xVals = math.range(p[0], q[0], 1).toArray();
 		const yVals = xVals.map(function (x) {
 			return Number((m * x + c).toFixed(2));
 		});
@@ -436,6 +451,8 @@ document.addEventListener('DOMContentLoaded', function(){
 	{ 
 		window.clearTimeout(tmHandle); 
 
+		document.getElementById("main").style.display = 'block';
+		document.getElementById("graph").style.display = 'none';
 		document.getElementById("apparatus").style.display = 'block';
 		document.getElementById("observations").style.width = '';
 
@@ -615,19 +632,28 @@ document.addEventListener('DOMContentLoaded', function(){
 	];
 
 	const hitLim = 2;
+	let soilVol;
 	let step, translate, rotation, lim, rotLim, objs, keys, enabled, small, cutStep, hitCtr;
 	init();
 
 	const tableData = [
-		{ "Soil Type": "Silt", "Wet Soil Mass(g)": "", "Water Content(%)": "" }, 
-		{ "Soil Type": "Sand", "Wet Soil Mass(g)": "", "Water Content(%)": "" }, 
-		{ "Soil Type": "Clay", "Wet Soil Mass(g)": "", "Water Content(%)": "" } 
+		{ "Soil Sample No.": "", "Water Content(%)": "", "Wet Compacted Soil Mass(g)": "", "Wet Density(g/cc)": "", "Dry Density(g/cc)": "" }, 
+		{ "Soil Sample No.": "", "Water Content(%)": "", "Wet Compacted Soil Mass(g)": "", "Wet Density(g/cc)": "", "Dry Density(g/cc)": "" }, 
+		{ "Soil Sample No.": "", "Water Content(%)": "", "Wet Compacted Soil Mass(g)": "", "Wet Density(g/cc)": "", "Dry Density(g/cc)": "" }, 
+		{ "Soil Sample No.": "", "Water Content(%)": "", "Wet Compacted Soil Mass(g)": "", "Wet Density(g/cc)": "", "Dry Density(g/cc)": "" }, 
+		{ "Soil Sample No.": "", "Water Content(%)": "", "Wet Compacted Soil Mass(g)": "", "Wet Density(g/cc)": "", "Dry Density(g/cc)": "" }, 
 	];
 
 	const objNames = Object.keys(objs);
 	objNames.forEach(function(elem, ind) {
 		const obj = document.getElementById(elem);
 		obj.addEventListener('click', function(event) {
+			if(elem === "soil")
+			{
+				soilVol = randomNumber(940, 950);
+				document.getElementById("output2").innerHTML = "Volume of soil = " + String(soilVol) + "cm" + "3".sup();
+			}
+
 			keys.push(elem);
 			step += 1;
 		});
