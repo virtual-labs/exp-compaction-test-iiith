@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	function logic(tableData)
 	{
-		const waterContents = [randomNumber(7, 9), randomNumber(10, 12), randomNumber(12, 14), randomNumber(15, 16), randomNumber(17, 18)], soilMasses = [randomNumber(1500, 1600), randomNumber(1700, 1800), randomNumber(2150, 2200), randomNumber(2100, 2150), randomNumber(2000, 2150),];
+		const waterContents = [randomNumber(7, 9), randomNumber(10, 12), randomNumber(12, 14), randomNumber(15, 16), randomNumber(17, 18)], soilMasses = [randomNumber(1500, 1600), randomNumber(1750, 1800), randomNumber(2150, 2200), randomNumber(2100, 2150), randomNumber(2000, 2150),];
 		let xVals = [], yVals = [], maxIx = 0;
 		tableData.forEach(function(row, index) {
 			row['Soil Sample No.'] = index + 1;
@@ -631,7 +631,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		"Click the restart button to perform the experiment again.",
 	];
 
-	const hitLim = 2;
+	const hitLim = 10;
 	let soilVol;
 	let step, translate, rotation, lim, rotLim, objs, keys, enabled, small, cutStep, hitCtr;
 	init();
