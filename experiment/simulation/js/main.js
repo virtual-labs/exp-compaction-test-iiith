@@ -31,22 +31,24 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 
 		updatePos(objs['rammer'], translate);
-		const currSoil = objs['soil'].move(step);
+		const currSoil = objs['soil'].move(step, translate), reqHeight = (objs['collar'].height + objs['mould'].height - 40) / 3;
 
-		if(objs['rammer'].pos[1] + objs['rammer'].height === currSoil.pos[1] + currSoil.errMargin)
+		if(objs['rammer'].pos[1] + objs['rammer'].height >= currSoil.pos[1] + currSoil.errMargin)
 		{
-			const retVal = currSoil.cut(5, (objs['collar'].height + objs['mould'].height) / 3);
-			if(retVal)
+			currSoil.cut(reqHeight, hitLim - hitCtr);
+			hitCtr += 1;
+
+			if(hitCtr === hitLim)
 			{
+				translate[1] = 0;
+				cutStep = false;
 				step += 1;
+				hitCtr = 0;
+				objs['rammer'].pos[1] = 90;
+				return;
 			}
 
 			translate[1] *= -1;
-			if(step === 11 || step === 13 || step === 15)
-			{
-				translate[1] = -1;
-				cutStep = false;
-			}
 		}
 	};
 
@@ -114,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			this.width = width;
 			this.pos = [x, y];
 			this.color = "#654321";
-			this.normal = 10;
+			this.normal = 20;
 			this.errMargin = 100;
 		};
 
@@ -123,21 +125,16 @@ document.addEventListener('DOMContentLoaded', function(){
 			ctx.fillStyle = this.color;
 			ctx.rect(this.pos[0], this.pos[1] + this.height - this.normal, this.width, this.normal);
 			ctx.moveTo(this.pos[0], this.pos[1] + this.height - this.normal);
-			ctx.quadraticCurveTo(this.pos[0] + this.width / 2, this.pos[1], this.pos[0] + this.width, this.pos[1] + this.height);
+			ctx.quadraticCurveTo(this.pos[0] + this.width / 2, this.pos[1], this.pos[0] + this.width, this.pos[1] + this.height - this.normal);
 			ctx.closePath();
 			ctx.fill();
 		};
 
-		cut(change, lim) {
-			if(this.height <= lim)
-			{
-				return 1;
-			}
-
-			this.pos[1] += change;
-			this.normal += change;
-			this.height -= change;
-			return 0;
+		cut(reqHeight, hitsLeft) {
+			this.pos[1] += Math.abs(reqHeight - this.height) / hitsLeft;
+			this.height -= Math.abs(reqHeight - this.height) / hitsLeft;
+			this.normal += Math.abs(reqHeight - this.normal) / hitsLeft;
+			this.errMargin -= this.errMargin / hitsLeft;
 		};
 	};
 	
@@ -161,7 +158,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			});
 		};
 
-		move(step) {
+		move(step, translate) {
 			if(step === 9 || step === 10)
 			{
 				return this.soils[0];
@@ -170,9 +167,16 @@ document.addEventListener('DOMContentLoaded', function(){
 			{
 				return this.soils[1];
 			}
-			else
+			else if(step === 13 || step === 14)
 			{
 				return this.soils[2];
+			}
+			else
+			{
+				this.soils.forEach((soil, ix) => {
+					updatePos(soil, translate);
+				});
+				return this;
 			}
 		};
 	};
@@ -321,6 +325,8 @@ document.addEventListener('DOMContentLoaded', function(){
 	function init()
 	{
 		cutStep = false;
+		hitCtr = 0;
+
 		document.getElementById("output1").innerHTML = "Mass of mould = ____ g";
 		document.getElementById("output2").innerHTML = "Volume of soil = ____ cm" + "3".sup();
 
@@ -334,7 +340,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		};
 		keys = [];
 
-		enabled = [["weight"], ["weight", "mould"], ["weight", "mould"], ["weight", "mould"], ["weight", "mould", "soil"], ["mould", "soil", "water"], ["mould", "soil", "water"], ["mould", "soil", "collar"], ["mould", "soil", "collar", "rammer"], ["mould", "soil", "collar", "rammer"], ["mould", "soil", "collar", "rammer"], ["mould", "soil", "collar", "rammer"], ["mould", "soil", "collar", "rammer"], ["mould", "soil", "collar", "rammer"], ["mould", "soil", "collar", "rammer"], []];
+		enabled = [["weight"], ["weight", "mould"], ["weight", "mould"], ["weight", "mould"], ["weight", "mould", "soil"], ["mould", "soil", "water"], ["mould", "soil", "water"], ["mould", "soil", "collar"], ["mould", "soil", "collar", "rammer"], ["mould", "soil", "collar", "rammer"], ["mould", "soil", "collar", "rammer"], ["mould", "soil", "collar", "rammer"], ["mould", "soil", "collar", "rammer"], ["mould", "soil", "collar", "rammer"], ["mould", "soil", "collar", "rammer"], ["weight", "mould", "collar"], ["weight", "mould", "collar"], []];
 		step = 0;
 		translate = [0, 0];
 		lim = [-1, -1];
@@ -392,7 +398,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		keys.forEach(function(val, ind, arr) {
 			if(canvasPos[0] >= objs[val].pos[0] - errMargin && canvasPos[0] <= objs[val].pos[0] + objs[val].width + errMargin && canvasPos[1] >= objs[val].pos[1] - errMargin && canvasPos[1] <= objs[val].pos[1] + objs[val].height + errMargin)
 			{
-				if(step === 2 && val === "mould")
+				if((step === 2 || step === 16) && val === "mould")
 				{
 					hover = true;
 					translate[0] = -5;
@@ -436,7 +442,7 @@ document.addEventListener('DOMContentLoaded', function(){
 					lim[1] = 160;
 				}
 
-				else if(step === 10 && val === "rammer")
+				else if((step === 10 || step === 12 || step === 14) && val === "rammer")
 				{
 					hover = true;
 					cutStep = true;
@@ -445,19 +451,11 @@ document.addEventListener('DOMContentLoaded', function(){
 
 				else if(step === 11 && val === "soil")
 				{
-					console.log(objs['soil'].pos, objs['soil'].height);
 					hover = true;
 					translate[0] = 5;
 					translate[1] = -1;
 					lim[0] = 600;
-					lim[1] = 160;
-				}
-
-				else if(step === 12 && val === "rammer")
-				{
-					hover = true;
-					cutStep = true;
-					translate[1] = 5;
+					lim[1] = 110;
 				}
 
 				else if(step === 13 && val === "soil")
@@ -466,14 +464,7 @@ document.addEventListener('DOMContentLoaded', function(){
 					translate[0] = 5;
 					translate[1] = -1;
 					lim[0] = 600;
-					lim[1] = 160;
-				}
-
-				else if(step === 14 && val === "rammer")
-				{
-					hover = true;
-					cutStep = true;
-					translate[1] = 5;
+					lim[1] = 60;
 				}
 			}
 		});
@@ -521,11 +512,13 @@ document.addEventListener('DOMContentLoaded', function(){
 		"Click on the rammer to compact the soil by repeated strikes.",
 		"Click on the soil to move a portion of it to the mould for compaction.",
 		"Click on the rammer to compact the soil by repeated strikes.",
+		"Click on 'Weighing Machine' in the apparatus menu to add a weighing machine to the workspace.", 
 		"Click on the mould with soil to weigh it. Finally, determine the water content of the soil sample. Use the following <a href=''>link</a> to learn more about water content determination.",
 		"Click the restart button to perform the experiment again.",
 	];
 
-	let step, translate, rotation, lim, rotLim, objs, keys, enabled, small, cutStep;
+	const hitLim = 2;
+	let step, translate, rotation, lim, rotLim, objs, keys, enabled, small, cutStep, hitCtr;
 	init();
 
 	const tableData = [
@@ -623,18 +616,30 @@ document.addEventListener('DOMContentLoaded', function(){
 		if(translate[0] !== 0 || translate[1] !== 0)
 		{
 			let temp = step;
-			const soilMoves = [9, 11, 13], mouldMoves = [2, 3];
+			const soilMoves = [9, 11, 13, 16], mouldMoves = [2, 3, 16], collarMoves = [16];
+
+			if(soilMoves.includes(step))
+			{
+				updatePos(objs['soil'].move(step, translate), translate);
+				if(step !== 16)
+				{
+					temp = limCheck(objs['soil'].move(step, translate), translate, lim, step);
+				}
+			}
+
+			if(collarMoves.includes(step))
+			{
+				updatePos(objs['collar'], translate);
+				if(step !== 16)
+				{
+					temp = limCheck(objs['collar'], translate, lim, step);
+				}
+			}
 
 			if(mouldMoves.includes(step))
 			{
 				updatePos(objs['mould'], translate);
 				temp = limCheck(objs['mould'], translate, lim, step);
-			}
-
-			if(soilMoves.includes(step))
-			{
-				updatePos(objs['soil'].move(step), translate);
-				temp = limCheck(objs['soil'].move(step), translate, lim, step);
 			}
 
 			step = temp;
