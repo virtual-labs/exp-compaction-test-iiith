@@ -27,16 +27,16 @@
 					"d": "A ratio of d of field to the d of lab"
 				},
 				"explanations": {
-					"a": "By definiton, relative compaciton (also called as degree of compaction) is the ratio of <i>in-situ</i> dry unit weight etching by compaction to the maximum dry unit weight obtained from an appropriate standard compaction test in the laboratory.",
-					"b": "By definiton, relative compaciton (also called as degree of compaction) is the ratio of <i>in-situ</i> dry unit weight etching by compaction to the maximum dry unit weight obtained from an appropriate standard compaction test in the laboratory.",
-					"c": "By definiton, relative compaciton (also called as degree of compaction) is the ratio of <i>in-situ</i> dry unit weight etching by compaction to the maximum dry unit weight obtained from an appropriate standard compaction test in the laboratory.",
-					"d": "Relative compaciton (also called as degree of compaction) is the ratio of <i>in-situ</i> dry unit weight etching by compaction to the maximum dry unit weight obtained from an appropriate standard compaction test in the laboratory."
+					"a": "By definiton, relative compaction (also called as degree of compaction) is the ratio of <i>in-situ</i> dry unit weight etching by compaction to the maximum dry unit weight obtained from an appropriate standard compaction test in the laboratory.",
+					"b": "By definiton, relative compaction (also called as degree of compaction) is the ratio of <i>in-situ</i> dry unit weight etching by compaction to the maximum dry unit weight obtained from an appropriate standard compaction test in the laboratory.",
+					"c": "By definiton, relative compaction (also called as degree of compaction) is the ratio of <i>in-situ</i> dry unit weight etching by compaction to the maximum dry unit weight obtained from an appropriate standard compaction test in the laboratory.",
+					"d": "Relative compaction (also called as degree of compaction) is the ratio of <i>in-situ</i> dry unit weight etching by compaction to the maximum dry unit weight obtained from an appropriate standard compaction test in the laboratory."
 				},
 				"difficulty": "beginner",
 				"correctAnswer": "d"
 			},
 			{
-				"question": "3. Standard proctor test is also known as ____.",
+				"question": "3. Standard Proctor test is also known as ____.",
 				"answers": {
 					"a": "I.S heavy compaction test",
 					"b": "I.S light compaction test",
@@ -44,16 +44,16 @@
 					"d": "None of the above"
 				},
 				"explanations": {
-					"a": "The weight of the rammer is 45 N and falls from a height of 450 mm. Modified proctor test is used for heavier compaction for the construction of airport pavements, etc. The compactive energy delivered is of the order of 2726 N-m per 1 cubic meter of soil which is about 4.5 times that of standard proctor test.",
-					"b": "The weight of the rammer is 25 N and falls from a height of 300 mm. In a standard proctor test, the compactive energy delivered is of the order of 605.777 N-m per 1 cubic meter of soil.",
-					"c": "The weight of the rammer is 25 N and falls from a height of 250 mm. The compactive energy delivered is of the order of 625 N-m per 1 cubic meter of soil. Optimum moisture contents obtained from Jodhpur minicompacter are comparable to those obtained from standard proctor test.",
+					"a": "The weight of the rammer is 45 N and falls from a height of 450 mm. Modified Proctor test is used for heavier compaction for the construction of airport pavements, etc. The compactive energy delivered is of the order of 2726 N-m per 1 cubic meter of soil which is about 4.5 times that of standard Proctor test.",
+					"b": "The weight of the rammer is 25 N and falls from a height of 300 mm. In a standard Proctor test, the compactive energy delivered is of the order of 605.777 N-m per 1 cubic meter of soil.",
+					"c": "The weight of the rammer is 25 N and falls from a height of 250 mm. The compactive energy delivered is of the order of 625 N-m per 1 cubic meter of soil. Optimum moisture contents obtained from Jodhpur minicompacter are comparable to those obtained from standard Proctor test.",
 					"d": "One of the other options does contain the right name."
 				},
 				"difficulty": "beginner",
 				"correctAnswer": "b"
 			},
 			{
-				"question": "4. The modified proctor test is used for which of the following?",
+				"question": "4. The modified Proctor test is used for which of the following?",
 				"answers": {
 					"a": "Runways",
 					"b": "Highways",
@@ -61,10 +61,10 @@
 					"d": "Earthen dams"
 				},
 				"explanations": {
-					"a": "The weight of the rammer is 45 N and falls from a height of 450 mm. Modified proctor test is used for heavier compaction for the construction of airport pavements, etc. The compactive energy delivered is of the order of 2726 N-m per 1 cubic meter of soil which is about 4.5 times that of standard proctor test. Heavy compaction is required for runways because the runway should resist the amount of dynamic load from the aircraft during take-off and landing.",
-					"b": "Standard proctor test is enough for these.",
-					"c": "Standard proctor test is enough for these.",
-					"d": "Standard proctor test is enough for these."
+					"a": "The weight of the rammer is 45 N and falls from a height of 450 mm. Modified Proctor test is used for heavier compaction for the construction of airport pavements, etc. The compactive energy delivered is of the order of 2726 N-m per 1 cubic meter of soil which is about 4.5 times that of standard Proctor test. Heavy compaction is required for runways because the runway should resist the amount of dynamic load from the aircraft during take-off and landing.",
+					"b": "Standard Proctor test is enough for these.",
+					"c": "Standard Proctor test is enough for these.",
+					"d": "Standard Proctor test is enough for these."
 				},
 				"difficulty": "beginner",
 				"correctAnswer": "a"

@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			this.height = height;
 			this.width = width;
 			this.pos = [x, y];
-			this.color = "#654321";
+			this.color = data.colors.soilBrown;
 			this.normal = 20;
 			this.errMargin = 100;
 		};
@@ -254,7 +254,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			ctx.fill();
 			ctx.stroke();
 
-			ctx.fillStyle = "#1ca3ec";
+			ctx.fillStyle = data.colors.blue;
 			ctx.beginPath();
 			ctx.rect(-this.width / 2 + 2, this.height / 2 - this.waterHeight, this.width - 4, this.waterHeight - 2);
 			ctx.rect(-this.width / 2 + 2, this.height / 2 - this.waterStart[0], this.flowDims[0], -this.flowPercent[0] * (this.height - this.waterStart[0]));
@@ -608,7 +608,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	canvas.style = "border:3px solid";
 	const ctx = canvas.getContext("2d");
 
-	const fill = "#A9A9A9", border = "black", lineWidth = 1.5, fps = 150;
+	const border = "black", lineWidth = 1.5, fps = 150;
 	const msgs = [
 		"Click on 'Weighing Machine' in the apparatus menu to add a weighing machine to the workspace.", 
 		"Click on 'Mould' in the apparatus menu to add a mould to the workspace.",
@@ -725,7 +725,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		{
 			if(objs['water'].flow(0.01))
 			{
-				objs['soil'].color = "#b86d29";
+				objs['soil'].color = data.colors.wetSoilBrown;
 				keys = keys.filter(function(val, index) {
 					return val !== "water";
 				});

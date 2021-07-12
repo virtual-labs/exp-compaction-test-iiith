@@ -2,7 +2,7 @@
 	"version": 2.0,
 	"questions": [
 		{
-			"question": "1. The energy ratio in modified proctor test to standard proctor test is given by ____.",
+			"question": "1. The energy ratio in modified Proctor test to standard Proctor test is given by ____.",
 			"answers": {
 				"a": "3.55",
 				"b": "4",
@@ -10,9 +10,9 @@
 				"d": "None of the above"
 			},
 			"explanations": {
-				"a": "From experiment.",
-				"b": "From experiment.",
-				"c": "From experiment.",
+				"a": "For a modified Proctor test a 45 N rammer falls from a 450 mm height whereas for a standard Proctor test a 25 N rammer falls from a 300 mm height. The compactive energy delivered is of the order of 2726 N-m per 1 cubic meter of soil for the modified Proctor test and 605.777 N-m per 1 cubic meter of soil for the standard Proctor test. We obtain the required ratio from these energy values.",
+				"b": "For a modified Proctor test a 45 N rammer falls from a 450 mm height whereas for a standard Proctor test a 25 N rammer falls from a 300 mm height. The compactive energy delivered is of the order of 2726 N-m per 1 cubic meter of soil for the modified Proctor test and 605.777 N-m per 1 cubic meter of soil for the standard Proctor test. We obtain the required ratio from these energy values.",
+				"c": "For a modified Proctor test a 45 N rammer falls from a 450 mm height whereas for a standard Proctor test a 25 N rammer falls from a 300 mm height. The compactive energy delivered is of the order of 2726 N-m per 1 cubic meter of soil for the modified Proctor test and 605.777 N-m per 1 cubic meter of soil for the standard Proctor test. We obtain the required ratio from these energy values.",
 				"d": "One of the other options does contain the right answer."
 			},
 			"difficulty": "beginner",
@@ -23,13 +23,13 @@
 			"answers": {
 				"a": "Compaction curve is not useful",
 				"b": "A well defined OMC exists",
-				"c": "Modified proctor test is recommended",
+				"c": "Modified Proctor test is recommended",
 				"d": "Jodhpur miniature compaction test is recommended"
 			},
 			"explanations": {
 				"a": "Due to the lack of cohesive nature in sandy soils (granular), we cannot perform compaction on such soils.",
 				"b": "Pure sandy soils cannot be compacted and hence an optimum moisture content(OMC) cannot be obtained.",
-				"c": "Pure sandy soils crumble under the action of heavy loads used in the modified compaction/proctor test and hence cannot be compacted.",
+				"c": "Pure sandy soils crumble under the action of heavy loads used in the modified compaction/Proctor test and hence cannot be compacted.",
 				"d": "Due to the lack of cohesiveness in pure sandy soils, no form of compaction can be performed."
 			},
 			"difficulty": "beginner",
@@ -62,7 +62,7 @@
 			},
 			"explanations": {
 				"a": "Compaction of soil is measured in terms of dry density. The addition of water to a dry soil helps in bringing the solid particles together by coating them with thin films of water. At low water content, the soil is stiff and it is difficult to pack it together. As the water content is increased, the water starts acting as a lubricant and the particles come closer under a given amount of compactive effort. The soil-water-air mixture starts occupying less volume affecting a gradual increase in dry density. As more and more water is added, a stage is reached when the air content of soil attains a minimum volume thus making dry density a maximum. Hence compaction is measured in terms of dry density.",
-				"b": "The amount of mechanical energy that is applied on the soil mass will have an impact on the compaction of soil. For a modified proctor test 45 N rammer falls from 450 mm height whereas for a standard proctor test 25 N rammer falls from 300 mm. The compactive energy delievered in modified proctor test is 4.5 times the standard proctor test. Modified proctor test delivers heavier compaction.",
+				"b": "The amount of mechanical energy that is applied on the soil mass will have an impact on the compaction of soil. For a modified Proctor test 45 N rammer falls from 450 mm height whereas for a standard Proctor test 25 N rammer falls from 300 mm. The compactive energy delievered in modified Proctor test is 4.5 times the standard Proctor test. Modified Proctor test delivers heavier compaction.",
 				"c": "The compaction depends on the type of soil. Cohesion less soils like sandy soils cannot be compacted.",
 				"d": "Compaction of soil is measured in terms of dry density. The addition of water to a dry soil helps in bringing the solid particles together by coating them with thin films of water. At low water content, the soil is stiff and it is difficult to pack it together. As the water content is increased, the water starts acting as a lubricant and the particles come closer under a given amount of compactive effort. The soil-water-air mixture starts occupying less volume affecting gradual increase in dry density. As more and more water is added, a stage is reached when the air content of soil attains a minimum volume thus making dry density a maximum. Hence compaction is measured in terms of dry density."
 			},
