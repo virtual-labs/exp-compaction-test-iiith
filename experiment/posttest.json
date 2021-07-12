@@ -1,18 +1,107 @@
-[
-{"question":"This is a Sample Question 1?",
-"answers":{
-            "a":"answer1",
-            "b":"answer2",
-            "c":"answer3",
-            "d":"answer4"
-          },
-"correctAnswer":"a"},
-{"question":"This is a Sample Question 2?",
-"answers":{
-            "a":"answer1",
-            "b":"answer2",
-            "c":"answer3",
-            "d":"answer4"
-          },
-"correctAnswer":"c"} 
-]
+{
+	"version": 2.0,
+	"questions": [
+		{
+			"question": "1. The energy ratio in modified Proctor test to standard Proctor test is given by ____.",
+			"answers": {
+				"a": "3.55",
+				"b": "4",
+				"c": "4.55",
+				"d": "None of the above"
+			},
+			"explanations": {
+				"a": "For a modified Proctor test a 45 N rammer falls from a 450 mm height whereas for a standard Proctor test a 25 N rammer falls from a 300 mm height. The compactive energy delivered is of the order of 2726 N-m per 1 cubic meter of soil for the modified Proctor test and 605.777 N-m per 1 cubic meter of soil for the standard Proctor test. We obtain the required ratio from these energy values.",
+				"b": "For a modified Proctor test a 45 N rammer falls from a 450 mm height whereas for a standard Proctor test a 25 N rammer falls from a 300 mm height. The compactive energy delivered is of the order of 2726 N-m per 1 cubic meter of soil for the modified Proctor test and 605.777 N-m per 1 cubic meter of soil for the standard Proctor test. We obtain the required ratio from these energy values.",
+				"c": "For a modified Proctor test a 45 N rammer falls from a 450 mm height whereas for a standard Proctor test a 25 N rammer falls from a 300 mm height. The compactive energy delivered is of the order of 2726 N-m per 1 cubic meter of soil for the modified Proctor test and 605.777 N-m per 1 cubic meter of soil for the standard Proctor test. We obtain the required ratio from these energy values.",
+				"d": "One of the other options does contain the right answer."
+			},
+			"difficulty": "beginner",
+			"correctAnswer": "c"
+		},
+		{
+			"question": "2. Which of the following is true for pure sandy soils?",
+			"answers": {
+				"a": "Compaction curve is not useful",
+				"b": "A well defined OMC exists",
+				"c": "Modified Proctor test is recommended",
+				"d": "Jodhpur miniature compaction test is recommended"
+			},
+			"explanations": {
+				"a": "Due to the lack of cohesive nature in sandy soils (granular), we cannot perform compaction on such soils.",
+				"b": "Pure sandy soils cannot be compacted and hence an optimum moisture content(OMC) cannot be obtained.",
+				"c": "Pure sandy soils crumble under the action of heavy loads used in the modified compaction/Proctor test and hence cannot be compacted.",
+				"d": "Due to the lack of cohesiveness in pure sandy soils, no form of compaction can be performed."
+			},
+			"difficulty": "beginner",
+			"correctAnswer": "a"
+		},
+		{
+			"question": "3. The 95% saturation and the 5% air voids lines are ____.",
+			"answers": {
+				"a": "Same",
+				"b": "Different",
+				"c": "Both a & b",
+				"d": "None of the above"
+			},
+			"explanations": {
+				"a": "From compaction curve, the 95% saturation curve is same as the 5% air content curve.",
+				"b": "Both curves are same.",
+				"c": "It is impossible for two things to be same as well as different.",
+				"d": "One of the other answers does contain the right answer."
+			},
+			"difficulty": "beginner",
+			"correctAnswer": "a"
+		},
+		{
+			"question": "4. Which of the following are factors that affect compaction?",
+			"answers": {
+				"a": "Water content",
+				"b": "Compaction energy",
+				"c": "Soil type",
+				"d": "All of the above"
+			},
+			"explanations": {
+				"a": "Compaction of soil is measured in terms of dry density. The addition of water to a dry soil helps in bringing the solid particles together by coating them with thin films of water. At low water content, the soil is stiff and it is difficult to pack it together. As the water content is increased, the water starts acting as a lubricant and the particles come closer under a given amount of compactive effort. The soil-water-air mixture starts occupying less volume affecting a gradual increase in dry density. As more and more water is added, a stage is reached when the air content of soil attains a minimum volume thus making dry density a maximum. Hence compaction is measured in terms of dry density.",
+				"b": "The amount of mechanical energy that is applied on the soil mass will have an impact on the compaction of soil. For a modified Proctor test 45 N rammer falls from 450 mm height whereas for a standard Proctor test 25 N rammer falls from 300 mm. The compactive energy delievered in modified Proctor test is 4.5 times the standard Proctor test. Modified Proctor test delivers heavier compaction.",
+				"c": "The compaction depends on the type of soil. Cohesion less soils like sandy soils cannot be compacted.",
+				"d": "Compaction of soil is measured in terms of dry density. The addition of water to a dry soil helps in bringing the solid particles together by coating them with thin films of water. At low water content, the soil is stiff and it is difficult to pack it together. As the water content is increased, the water starts acting as a lubricant and the particles come closer under a given amount of compactive effort. The soil-water-air mixture starts occupying less volume affecting gradual increase in dry density. As more and more water is added, a stage is reached when the air content of soil attains a minimum volume thus making dry density a maximum. Hence compaction is measured in terms of dry density."
+			},
+			"difficulty": "beginner",
+			"correctAnswer": "d"
+		},
+		{
+			"question": "5. In a compaction test with increase in compactive effort, ____.",
+			"answers": {
+				"a": "Maximum dry density increases but OMC decreases",
+				"b": "The compaction curve is shifted to the left and higher",
+				"c": "Both maximum dry density and OMC increase",
+				"d": "Both a and b"
+			},
+			"explanations": {
+				"a": "While this is right, it is not the complete answer.",
+				"b": "While this is right, it is not the complete answer.",
+				"c": "Dry density is inversely proportional to water content at a constant degree of saturation. The formula is: γ<sub>d</sub> = G * γ<sub>w</sub> * s / (s + w * G).",
+				"d": "With an increase in compactive effort, more mechanical energy is delivered to the soil where at lesser optimum mositure content(OMC), maximum dry density is obtained. Subsequently, the compaction curve is shifted to the left and higher."
+			},
+			"difficulty": "intermediate",
+			"correctAnswer": "d"
+		},
+		{
+			"question": "6. Compaction of an embankment is carried out in 500 mm thick layers. The rammer used for compaction has a foot area of 0.05 m<sup>2</sup> and the energy imparted in every drop of the rammer is 400 Nm. Assuming 50% more energy in each pass over the compacted area due to overlap, the number of passes required to develop compactive energy equivalent to Indian Standard Light Compacting for each layer would be ____ .",
+			"answers": {
+				"a": "10",
+				"b": "16",
+				"c": "20",
+				"d": "25"
+			},
+			"explanations": {
+				"a": "Considering 50% more energy in each drop of the rammer, we first find the total energy imparted by the rammer per pass. Next, we find the volume of soil compacted by the rammer as foot area x layer thickness = (0.05 x 10<sup>4</sup>) x (500 x 10<sup>-1</sup>) = 25000 cc. Now, for the Indian Standard Light Compaction Test, 2.6 kg hammer is allowed to fall from a height of 31 cm. Also, soil is compacted in 3 layers with each layer tamped 25 times. The volume of soil considered is 1000 cc. Thus, Energy imparted in Light Compaction Test = (2.6 x 9.81) x (31 x 10<sup>-2</sup>) x 3 x 25 = 593.01 Nm. Finally, we compare the energy from our rammer and that from the Light Compaction Test as n x energy / volume = 593.01 / 1000 where n is the number of passes.",
+				"b": "Considering 50% more energy in each drop of the rammer, we first find the total energy imparted by the rammer per pass. Next, we find the volume of soil compacted by the rammer as foot area x layer thickness = (0.05 x 10<sup>4</sup>) x (500 x 10<sup>-1</sup>) = 25000 cc. Now, for the Indian Standard Light Compaction Test, 2.6 kg hammer is allowed to fall from a height of 31 cm. Also, soil is compacted in 3 layers with each layer tamped 25 times. The volume of soil considered is 1000 cc. Thus, Energy imparted in Light Compaction Test = (2.6 x 9.81) x (31 x 10<sup>-2</sup>) x 3 x 25 = 593.01 Nm. Finally, we compare the energy from our rammer and that from the Light Compaction Test as n x energy / volume = 593.01 / 1000 where n is the number of passes.",
+				"c": "Considering 50% more energy in each drop of the rammer, we first find the total energy imparted by the rammer per pass. Next, we find the volume of soil compacted by the rammer as foot area x layer thickness = (0.05 x 10<sup>4</sup>) x (500 x 10<sup>-1</sup>) = 25000 cc. Now, for the Indian Standard Light Compaction Test, 2.6 kg hammer is allowed to fall from a height of 31 cm. Also, soil is compacted in 3 layers with each layer tamped 25 times. The volume of soil considered is 1000 cc. Thus, Energy imparted in Light Compaction Test = (2.6 x 9.81) x (31 x 10<sup>-2</sup>) x 3 x 25 = 593.01 Nm. Finally, we compare the energy from our rammer and that from the Light Compaction Test as n x energy / volume = 593.01 / 1000 where n is the number of passes.",
+				"d": "Considering 50% more energy in each drop of the rammer, total energy imparted by rammer = 1.50 x Energy imparted in every drop of rammer = 1.5 x 400 = 600 Nm. The volume of soil compacted by rammer = Foot area x layer thickness = 0.05 x 10<sup>4</sup> x 500 x 10<sup>-1</sup> = 25000 cc. Now, For Indian Standard Light Compaction Test, 2.6 kg of hammer is allowed to fall from a height of 31 cm. Also, soil is compacted in 3 layers with each layer tamped 25 times. The volume of soil considered is 1000 cc. Thus, Energy imparted in Light Compaction Test = (2.6 x 9.81) x (31 x 10<sup>-2</sup>) x 3 x 25 = 593.01 Nm. Now, comparing energy from rammer and Light Compaction Test, n x 600 / 25000 = 593.01 / 1000 => n = 24.71 ≈ 25."
+			},
+			"difficulty": "advanced",
+			"correctAnswer": "d"
+		}
+	]
+}
