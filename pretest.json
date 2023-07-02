@@ -1,0 +1,90 @@
+{
+	"version": 2.0,
+	"questions": [
+			{
+				"question": "1. Compaction of a soil is measured in terms of which of the following?",
+				"answers": {
+					"a": "Compressibility",
+					"b": "Specific gravity",
+					"c": "Dry density",
+					"d": "Permeability"
+				},
+				"explanations": {
+					"a": "Like compaction, the compressibility of a soil is the ability of soil to decrease its volume under the action of mechanical loads. This itself depends on dry density of the soil.",
+					"b": "Compaction does not depend upon the specific gravity of a soil that is dependent on dry density and the amount of water content needed for the compactive effort.",
+					"c": "Compaction of soil is measured in terms of dry density. The addition of water to a dry soil helps in bringing the solid particles together by coating them with thin films of water. At low water content, the soil is stiff and it is difficult to pack it together. As the water content is increased, the water starts acting as a lubricant and the particles come closer under a given amount of compactive effort. The soil-water-air mixture starts occupying less volume affecting a gradual increase in dry density. As more and more water is added, a stage is reached when the air content of soil attains a minimum volume thus making dry density a maximum. Hence compaction is measured in terms of dry density.",
+					"d": "Compaction is a process where water is added to the dry soil and the particles of the soil come together making the soil firm whereas the permeability of the soil is the ability of soil to allow water to flow through its voids."
+				},
+				"difficulty": "beginner",
+				"correctAnswer": "c"
+			},
+			{
+				"question": "2. Relative compaction is ____.",
+				"answers": {
+					"a": "Similar to relative density",
+					"b": "A compaction process",
+					"c": "Dry density obtained in the field",
+					"d": "A ratio of d of field to the d of lab"
+				},
+				"explanations": {
+					"a": "By definiton, relative compaction (also called as degree of compaction) is the ratio of <i>in-situ</i> dry unit weight etching by compaction to the maximum dry unit weight obtained from an appropriate standard compaction test in the laboratory.",
+					"b": "By definiton, relative compaction (also called as degree of compaction) is the ratio of <i>in-situ</i> dry unit weight etching by compaction to the maximum dry unit weight obtained from an appropriate standard compaction test in the laboratory.",
+					"c": "By definiton, relative compaction (also called as degree of compaction) is the ratio of <i>in-situ</i> dry unit weight etching by compaction to the maximum dry unit weight obtained from an appropriate standard compaction test in the laboratory.",
+					"d": "Relative compaction (also called as degree of compaction) is the ratio of <i>in-situ</i> dry unit weight etching by compaction to the maximum dry unit weight obtained from an appropriate standard compaction test in the laboratory."
+				},
+				"difficulty": "beginner",
+				"correctAnswer": "d"
+			},
+			{
+				"question": "3. Standard Proctor test is also known as ____.",
+				"answers": {
+					"a": "I.S heavy compaction test",
+					"b": "I.S light compaction test",
+					"c": "Jodhpur minicompacter test",
+					"d": "None of the above"
+				},
+				"explanations": {
+					"a": "The weight of the rammer is 45 N and falls from a height of 450 mm. Modified Proctor test is used for heavier compaction for the construction of airport pavements, etc. The compactive energy delivered is of the order of 2726 N-m per 1 cubic meter of soil which is about 4.5 times that of standard Proctor test.",
+					"b": "The weight of the rammer is 25 N and falls from a height of 300 mm. In a standard Proctor test, the compactive energy delivered is of the order of 605.777 N-m per 1 cubic meter of soil.",
+					"c": "The weight of the rammer is 25 N and falls from a height of 250 mm. The compactive energy delivered is of the order of 625 N-m per 1 cubic meter of soil. Optimum moisture contents obtained from Jodhpur minicompacter are comparable to those obtained from standard Proctor test.",
+					"d": "One of the other options does contain the right name."
+				},
+				"difficulty": "beginner",
+				"correctAnswer": "b"
+			},
+			{
+				"question": "4. The modified Proctor test is used for which of the following?",
+				"answers": {
+					"a": "Runways",
+					"b": "Highways",
+					"c": "Embankments",
+					"d": "Earthen dams"
+				},
+				"explanations": {
+					"a": "The weight of the rammer is 45 N and falls from a height of 450 mm. Modified Proctor test is used for heavier compaction for the construction of airport pavements, etc. The compactive energy delivered is of the order of 2726 N-m per 1 cubic meter of soil which is about 4.5 times that of standard Proctor test. Heavy compaction is required for runways because the runway should resist the amount of dynamic load from the aircraft during take-off and landing.",
+					"b": "Standard Proctor test is enough for these.",
+					"c": "Standard Proctor test is enough for these.",
+					"d": "Standard Proctor test is enough for these."
+				},
+				"difficulty": "beginner",
+				"correctAnswer": "a"
+			},
+			{
+				"question": "5. Which of the following values increases due to compaction?",
+				"answers": {
+					"a": "Shear strength",
+					"b": "Void ratio",
+					"c": "Percent of air voids",
+					"d": "None of the above"
+				},
+				"explanations": {
+					"a": "During compaction, the soil particles come closer and the soil becomes firm, improving its shear strength.",
+					"b": "Void ratio decreases during compaction.",
+					"c": "Since void ratio decreases, percentage of air voids also decreases during compaction.",
+					"d": "One of the other options does contain the right answer."
+				},
+				"difficulty": "intermediate",
+				"correctAnswer": "a"
+			}	
+	]
+}
