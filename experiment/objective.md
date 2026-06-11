@@ -1,3 +1,5 @@
-To determine the Optimum moisture content and maximum dry density of a soil by standard proctor compaction test. 
+The objectives of this experiment are to:
 
-[Read More](docs/CompactionTest.pdf)
+- Determine the optimum moisture content and maximum dry density of a soil sample.
+- Understand the principle and procedure of the Standard Proctor compaction test.
+- Learn the importance of soil compaction in the construction of foundations, embankments, and pavements.

@@ -1,1 +1,1 @@
-To determine the Optimum Moisture Content (OMC) and maximum dry density of a soil sample by the standard Proctor compaction test.
+To determine the optimum moisture content and maximum dry density of a soil sample using the Standard Proctor compaction test.
