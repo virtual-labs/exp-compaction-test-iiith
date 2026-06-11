@@ -1,8 +1,76 @@
-For the construction of highways, airports, and other structures, it is often necessary to compact soil to improve its strength. Proctor (1933) developed a laboratory compaction test procedure to determine the maximum dry unit weight of compaction of soils which can be used for specification of field compaction. 
+Compaction is the process of increasing the density of soil by reducing the volume of air voids through mechanical means. It is one of the most common methods used to improve the engineering properties of soil for construction purposes.
 
-Compaction is the process of densification of soil mass by reducing the air voids. The purpose of laboratory compaction test is to determine the proper amount of water at which the weight of the soil grains in a unit volume of the compacted soil is maximum and this value is thus called the Optimum Moisture Content (OMC). In the laboratory, the different values of moisture contents and the resulting dry densities obtained after compaction are plotted, the former as abscissa and the latter as ordinate. The points thus obtained are joined together in a curve. The maximum dry density and the corresponding OMC are noted from the curve.
+The degree of compaction depends on the water content of the soil. As the water content increases, the dry density of the soil also increases until a maximum value is reached. The corresponding water content is known as the optimum moisture content (OMC). Beyond this point, further addition of water decreases the dry density.
 
-Wet density of the compacted soil is calculated as: γ<sub>t</sub> = (w<sub>1</sub> - w<sub>2</sub>) / V
-> where w<sub>1</sub> = Weight of mould with moist compacted soil, w<sub>2</sub> = Weight of empty mould, V = Volume of mould
+The bulk or wet unit weight of compacted soil is given by:
 
-The dry density of the soil shall be calculated as: γ<sub>d</sub> = Wet density of compacted soil (γ<sub>t</sub>) / (1 + Water content of soil (w)).
+$$
+\gamma_t=\frac{W_1-W_2}{V}
+$$
+
+where,
+
+- $W_1$ = mass of the mould with compacted moist soil,
+- $W_2$ = mass of the empty mould,
+- $V$ = volume of the mould.
+
+The dry unit weight is calculated as:
+
+$$
+\gamma_d=\frac{\gamma_t}{1+w}
+$$
+
+where,
+
+- $\gamma_d$ = dry unit weight,
+- $\gamma_t$ = wet unit weight,
+- $w$ = water content expressed in decimal form.
+
+### Importance of Compaction
+
+Compaction improves the engineering properties of soil by:
+
+- Increasing shear strength.
+- Reducing compressibility and settlement.
+- Decreasing permeability.
+- Improving bearing capacity.
+- Reducing shrinkage and swelling.
+
+Proper compaction is essential for the stability and durability of engineering structures.
+
+### Principle of the Standard Proctor Test
+
+The Standard Proctor Compaction Test is used to determine the relationship between water content and dry density of soil.
+
+In this test, soil samples are compacted at different water contents using a standard amount of compactive effort. The dry densities obtained are plotted against the corresponding water contents to produce the compaction curve.
+
+From the compaction curve:
+
+- The maximum dry density (MDD) is determined.
+- The corresponding optimum moisture content (OMC) is obtained.
+
+These values are commonly used as standards for field compaction.
+
+### Factors Affecting Compaction
+
+The compaction characteristics of soil depend on:
+
+- Water content.
+- Type of soil.
+- Compactive effort.
+- Method of compaction.
+
+Different soils exhibit different compaction behaviours due to variations in particle size and mineral composition.
+
+### Engineering Applications
+
+Compaction testing is widely used in:
+
+- Highway construction.
+- Airfield pavements.
+- Earth dams.
+- Embankments.
+- Foundation construction.
+- Landfill engineering.
+
+Since proper compaction improves the strength and stability of soil, the determination of OMC and MDD is an essential part of geotechnical engineering practice.
