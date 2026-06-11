@@ -1,0 +1,7 @@
+data = {
+	"colors": {
+		"blue": "#1ca3ec",
+		"soilBrown": "#654321",
+		"wetSoilBrown": "#b86d29"
+	}
+}
